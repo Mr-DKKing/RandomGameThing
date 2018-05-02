@@ -1,0 +1,758 @@
+<html>
+    <head>
+        <title>Krafter Arena</title>
+        <script>
+            var PlayButtonClicked = false;
+            var commanderHealth = 100;
+            var commanderHealth2 = 100;
+            var TriggerStoryScript = true;
+            //For ease of reference
+            function StartArena() {
+                var canvas = document.getElementById("Arena");
+                var ctx = canvas.getContext("2d");
+                 
+
+                // Setting background to black
+                ctx.fillStyle = "gray";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                //Asking users for username
+                
+                Player1Username  = prompt("Enter your gamertag, Player One:", "Player One");
+                Player2Username = prompt("Enter your gamertag, Player Two:", "Player Two");
+                document.getElementById("user1Health").innerHTML = Player1Username+"'s Health: "+commanderHealth;
+                document.getElementById("user2Health").innerHTML = Player2Username + "'s Health: " + commanderHealth2;
+                document.getElementById("storyBoard").innerHTML = "In a land known as Joelandia, a civil war is brewing. Emperor Joe, in order to ensure the protection of his people, orders a qualification tournament to be accepted into his military. The loser dies gloriously. He ordered his peasants to make an E-sports tournamnet where " + Player1Username + " and " + Player2Username + "will be contending today. Let's begin.";
+                /*function StartTimer() {
+                    var secs = 0;
+                    setInterval( function(){ secs++; if(secs == 0) {
+                        document.getElementById("storyBoard").innerHTML = "In a land known as Joelandia, a civil war is brewing. Emperor Joe, in order to ensure the protection of his people, orders a qualification tournament to be accepted into his military. The loser dies gloriously. He ordered his peasants to make an E-sports tournamnet where " + Player1Username + " and " + Player2Username + "will be contending today. Let's begin.";
+
+                    }
+                    if (secs == 30) {
+                        document.getElementbyId("storyBoard").innerHTML = "Amir the Angel blesses his healing upon your and he gives your both 25.";
+                        commanderHealth = commanderHealth + 25;
+                        commanderHealth2 = commanderHealth +25;
+                        document.getElementById("user1Health").innerHTML = Player1Username+"'s Health: "+commanderHealth;
+                        document.getElementById("user2Health").innerHTML = Player2Username + "'s Health: " + commanderHealth2;
+                    } 
+                    if (secs == 60) {
+                        document.getElementById("storyBoard").innerHTML = "Joe has developed a quixk temper in his time of being an emperor and is impatient. His wrath now deducts 50 health from both opponents.";
+                        commanderHealth = commanderHealth -50;
+                        commanderHealth2 = commanderHealth -50;
+                        document.getElementById("user1Health").innerHTML = Player1Username+"'s Health: "+commanderHealth;
+                        document.getElementById("user2Health").innerHTML = Player2Username + "'s Health: " + commanderHealth2;
+                    }
+                }, 1000);
+
+
+                }
+                StartTimer(); */
+                PlayButtonClicked = true;
+                
+                
+                
+
+            }
+            
+             //sprite sheet is 484px X 147px
+
+            //setting properites of sprites
+            var commanderShift = 0;
+            var commanderFrameWidth = 91;
+            var commanderFrameHieght = 147;
+            var commanderTotalFrames = 6;
+            var commanderCurrentFrame = 0;
+            var commanderXPosition = 350;
+            var commanderYPosition = 150;
+            var commanderShiftLeft = 0;
+            var commanderFrameWidthLeft = 92;
+            var commanderFrameHeightLeft = 146;
+            var commanderCurrentFrameLeft = 0;
+            var commanderTotalFramesLeft = 6;
+            var commanderShiftUp = 0;
+            var commanderFrameWidthUp = 91;
+            var commanderFrameHieghtUp = 147;
+            var commanderTotalFramesUp = 6;
+            var commanderCurrentFrameUp = 0;
+            var commanderShiftDown = 0;
+            var commanderFrameWidthDown = 92;
+            var commanderFrameHeightDown = 146;
+            var commanderTotalFramesDown = 6;
+            var commanderCurrentFrameDown = 0;
+            var commanderShotShift = 0;
+            var commanderShotFrameWidth = 85;
+            var commanderShotFrameHeight = 21;
+            var commanderShotTotalFrames = 3;
+            var commanderShotCurrentFrame = 0;
+            var commanderShotShiftLeft = 0;
+            var commanderShotFrameWidthLeft = 85;
+            var commanderShotFrameHeightLeft = 21;
+            var commanderShotTotalFramesLeft = 3;
+            var commanderShotCurrentFrameLeft = 0;
+            var commanderShift2 = 0;
+            var commanderFrameWidth2 = 91;
+            var commanderFrameHieght2 = 147;
+            var commanderTotalFrames2 = 6;
+            var commanderCurrentFrame2 = 0;
+            var commanderXPosition2 = 500;
+            var commanderYPosition2 = 200;
+            var commanderShiftLeft2 = 0;
+            var commanderFrameWidthLeft2 = 92;
+            var commanderFrameHeightLeft2 = 146;
+            var commanderCurrentFrameLeft2 = 0;
+            var commanderTotalFramesLeft2 = 6;
+            var commanderShiftUp2 = 0;
+            var commanderFrameWidthUp2 = 91;
+            var commanderFrameHieghtUp2 = 147;
+            var commanderTotalFramesUp2 = 6;
+            var commanderCurrentFrameUp2 = 0;
+            var commanderShiftDown2 = 0;
+            var commanderFrameWidthDown2 = 92;
+            var commanderFrameHeightDown2 = 146;
+            var commanderTotalFramesDown2 = 6;
+            var commanderCurrentFrameDown2 = 0;
+            var commanderShotShift2 = 0;
+            var commanderShotFrameWidth2 = 85;
+            var commanderShotFrameHeight2 = 21;
+            var commanderShotTotalFrames2 = 3;
+            var commanderShotCurrentFrame2 = 0;
+            var commanderShotShiftLeft2 = 0;
+            var commanderShotFrameWidthLeft2 = 85;
+            var commanderShotFrameHeightLeft2 = 21;
+            var commanderShotTotalFramesLeft2 = 3;
+            var commanderShotCurrentFrameLeft2 = 0;
+            
+
+
+            function WASDpressed(event) {
+                if (PlayButtonClicked) {
+                var AngryJoe = Math.floor(Math.random()*1000);
+                var unluckyMan = Math.floor(Math.random()*2)+1;
+                var canvas = document.getElementById("Arena");
+                var ctx = canvas.getContext("2d");
+                var WASDkey = event.which
+        
+                if (WASDkey === 100 || WASDkey === 68) {
+                    var commanderSprite = new Image();
+                    commanderSprite.src = "wizardCommanderArena4.png";
+                    commanderSprite.addEventListener("load", loadImage, false);
+                
+                
+                    function loadImage() {
+                        animateCommanderRight();
+                    }
+                
+                    //Drawing the frames on the canvas
+                    var recentCommanderXPosition = commanderXPosition
+                    function animateCommanderRight() {
+                        if (commanderXPosition < (recentCommanderXPosition + 10)) {
+                            ctx.fillStyle = "gray";
+                            ctx.fillRect(commanderXPosition, commanderYPosition, 150, 200);
+
+                            //drawing each frame
+                            ctx.drawImage(commanderSprite, commanderShift, 0, commanderFrameWidth, commanderFrameHieght, commanderXPosition, commanderYPosition, commanderFrameWidth, commanderFrameHieght);
+                            commanderShift += commanderFrameWidth + 1;
+
+                            //returning to beginning of sprite sheet if at end of sheet
+                            if (commanderCurrentFrame == commanderTotalFrames) {
+                                commanderShift = 0;
+                                commanderCurrentFrame = 0;
+                            }
+                            
+                            //telling function to move onto next Frame
+                            commanderCurrentFrame++;
+
+                            
+                            setTimeout(function(){requestAnimationFrame(animateCommanderRight);}, 50);
+                            commanderXPosition=commanderXPosition+4;
+                            previousWASD = WASDkey;
+                        }
+                        else {
+                            return;
+                        }
+                    }
+                }
+                if (WASDkey === 97 || WASDkey === 65) {
+                    var commanderSpriteLeft = new Image();
+                    commanderSpriteLeft.src = "wizardCommanderLeft.png";
+                    commanderSpriteLeft.addEventListener("load", loadImageLeft, false);
+
+                    function loadImageLeft() {
+                        animateCommanderLeft();
+                    }
+                    recentCommanderXPosition = commanderXPosition;
+                    recentCommanderYPosition = commanderYPosition;
+                    function animateCommanderLeft() {
+                        if (commanderXPosition > (recentCommanderXPosition - 10)) {
+                            ctx.fillStyle = "gray";
+                            ctx.fillRect(commanderXPosition, commanderYPosition, 150, 200);
+
+                            ctx.drawImage(commanderSpriteLeft, commanderShiftLeft, 0, commanderFrameWidthLeft, commanderFrameHeightLeft, commanderXPosition, commanderYPosition, commanderFrameWidthLeft, commanderFrameHeightLeft);
+                            commanderShiftLeft += commanderFrameWidthLeft + 1;
+
+                            if (commanderCurrentFrameLeft == commanderTotalFramesLeft) {
+                                commanderShiftLeft = 0;
+                                commanderCurrentFrameLeft = 0;
+                            }
+
+                            commanderCurrentFrameLeft ++;
+
+                            setTimeout(function(){requestAnimationFrame(animateCommanderLeft);}, 50);
+                            commanderXPosition=commanderXPosition-4;
+                            previousWASD = WASDkey;
+                            
+                        }
+                        else {
+                            return;
+                        }
+                    }
+                }
+                if (WASDkey === 119 || WASDkey === 87) {
+                    var commanderSpriteUp = new Image();
+                    commanderSpriteUp.src = "wizardCommanderArena4.png";
+                    commanderSpriteUp.addEventListener("load", loadImageUp, false);
+                
+                
+                    function loadImageUp() {
+                        animateCommanderUp();
+                    }
+                
+                    //Drawing the frames on the canvas
+                    var recentCommanderYPosition = commanderYPosition
+                    function animateCommanderUp() {
+                        if (commanderYPosition > (recentCommanderYPosition - 10)) {
+                            ctx.fillStyle = "gray";
+                            ctx.fillRect(commanderXPosition, commanderYPosition, 150, 200);
+
+                            //drawing each frame
+                            ctx.drawImage(commanderSpriteUp, commanderShiftUp, 0, commanderFrameWidthUp, commanderFrameHieghtUp, commanderXPosition, commanderYPosition, commanderFrameWidthUp, commanderFrameHieghtUp);
+                            commanderShiftUp += commanderFrameWidthUp + 1;
+
+                            //returning to beginning of sprite sheet if at end of sheet
+                            if (commanderCurrentFrameUp == commanderTotalFramesUp) {
+                                commanderShiftUp = 0;
+                                commanderCurrentFrameUp = 0;
+                            }
+                            
+                            //telling function to move onto next Frame
+                            commanderCurrentFrameUp++;
+
+                            
+                            setTimeout(function(){requestAnimationFrame(animateCommanderUp);}, 50);
+                            commanderYPosition=commanderYPosition-4;
+                            previousWASD = WASDkey;
+                        }
+                        else {
+                            return;
+                        }
+                    }
+                }
+                if (WASDkey === 83 || WASDkey === 115) {
+                var commanderSpriteDown = new Image();
+                    commanderSpriteDown.src = "wizardCommanderLeft.png";
+                    commanderSpriteDown.addEventListener("load", loadImageDown, false);
+
+                    function loadImageDown() {
+                        animateCommanderDown();
+                    }
+                    recentCommanderYPosition = commanderYPosition;
+                    function animateCommanderDown() {
+                        if (commanderYPosition < (recentCommanderYPosition + 10)) {
+                            ctx.fillStyle = "gray";
+                            ctx.fillRect(commanderXPosition, commanderYPosition, 150, 200);
+
+                            ctx.drawImage(commanderSpriteDown, commanderShiftDown, 0, commanderFrameWidthDown, commanderFrameHeightDown, commanderXPosition, commanderYPosition, commanderFrameWidthDown, commanderFrameHeightDown);
+                            commanderShiftDown += commanderFrameWidthDown + 1;
+
+                            if (commanderCurrentFrameDown == commanderTotalFramesDown) {
+                                commanderShiftDown = 0;
+                                commanderCurrentFrameDown = 0;
+                            }
+
+                            commanderCurrentFrameDown ++;
+
+                            setTimeout(function(){requestAnimationFrame(animateCommanderDown);}, 50);
+                            commanderYPosition=commanderYPosition+4;
+                            previousWASD = WASDkey;
+                            
+                        }
+                        else {
+                            return;
+                        }
+                    }
+                }
+                var commanderReadyTiming = true;
+                var commanderReadyTimingLeft = true;
+                
+                if (WASDkey === 101 || WASDkey === 69) {
+                    var commanderOneShotCounter = true;
+                    var commanderOneShotCounterLeft = true;
+                    commanderShotXPosition = commanderXPosition;
+                    commanderShotYPosition = commanderYPosition;
+                    if (previousWASD === 100 || previousWASD === 68) {
+                    var commanderShotSprite = new Image();
+                    commanderShotSprite.src = "wizardShotArena.png";
+
+                    var commanderShotReady = new Image();
+                    commanderShotReady.src = "wizardCommanderReady.png";
+                    commanderShotSprite.addEventListener("load", loadImageShot, false);
+                    var recentShotXPosition = commanderShotXPosition;
+                    function loadImageShot() {
+                        animateCommanderShot();
+                    }
+                    
+                    function animateCommanderShot() {
+                        if (commanderShotXPosition < recentShotXPosition + 500) {
+                        ctx.fillStyle = "gray";
+                        ctx.fillRect(commanderShotXPosition, commanderShotYPosition, 100, 25);
+                    
+                        if (commanderReadyTiming) {
+                        ctx.fillStyle = "gray";
+                        ctx.fillRect(commanderXPosition, commanderYPosition, 150, 200);
+                        ctx.drawImage(commanderShotReady, commanderXPosition, commanderYPosition +30);
+                        }
+                        ctx.drawImage(commanderShotSprite, commanderShotShift, 0, commanderShotFrameWidth, commanderShotFrameHeight, commanderShotXPosition, commanderShotYPosition, commanderShotFrameWidth, commanderShotFrameHeight);
+                        commanderShotShift += commanderShotFrameWidth +1;
+
+                        if(commanderShotCurrentFrame == commanderShotTotalFrames) {
+                            commanderShotShift = 0;
+                            commanderShotCurrentFrame = 0;
+                        }
+
+                        commanderShotCurrentFrame++;
+
+                        setTimeout(function(){requestAnimationFrame(animateCommanderShot);}, 50);
+                        commanderShotXPosition = commanderShotXPosition + 8;
+                        if ((((commanderXPosition2 -30) <= commanderShotXPosition) && (commanderShotXPosition <= (commanderXPosition2 +30))) 
+                                && (((commanderYPosition2 +30) >= commanderShotYPosition) && ((commanderYPosition2 -30) <= commanderShotYPosition))) {
+                            if (commanderOneShotCounter) {
+                            commanderHealth2 = commanderHealth2 - 34;
+                            commanderOneShotCounter = false;
+                            }
+                            document.getElementById("user2Health").innerHTML = Player2Username +"'s Health: " + commanderHealth2;
+                            
+                        }
+                        commanderReadyTiming = false;
+                        
+                        }
+                        else {
+                            ctx.fillStyle = "gray";
+                            ctx.fillRect(commanderShotXPosition, commanderShotYPosition, 200, 200);
+                            return;
+                        }
+                        
+                    }
+
+
+                    }
+                    if (previousWASD === 97 || previousWASD === 65) {
+                        commanderShotXPositionLeft = commanderXPosition;
+                        commanderShotYPositionLeft = commanderYPosition;
+                        var commanderShotSpriteLeft = new Image();
+                        commanderShotSpriteLeft.src = "wizardShotArena2.png";
+
+                        var commanderShotReadyLeft = new Image();
+                        commanderShotReadyLeft.src = "wizardCommanderReady2.png";
+                        commanderShotSpriteLeft.addEventListener("load", loadImageShotLeft, false);
+                        
+                        var recentShotXPositionLeft = commanderShotXPosition;
+                        function loadImageShotLeft() {
+                            animateCommanderShotLeft();
+                        }
+                        
+                        function animateCommanderShotLeft() {
+                            if (commanderShotXPositionLeft > recentShotXPositionLeft - 500) {
+                            ctx.fillStyle = "gray";
+                            ctx.fillRect(commanderShotXPositionLeft, commanderShotYPositionLeft, 100, 25);
+                            
+                            if (commanderReadyTimingLeft) {
+                            ctx.fillStyle = "gray";
+                            ctx.fillRect(commanderXPosition, commanderYPosition, 150, 200);
+                            ctx.drawImage(commanderShotReadyLeft, commanderXPosition, commanderYPosition +30);
+                            }
+                            ctx.drawImage(commanderShotSpriteLeft, commanderShotShiftLeft, 0, commanderShotFrameWidthLeft, commanderShotFrameHeightLeft, commanderShotXPositionLeft, commanderShotYPositionLeft, commanderShotFrameWidthLeft, commanderShotFrameHeightLeft);
+                            commanderShotShiftLeft += commanderShotFrameWidthLeft +1;
+                                
+                            if(commanderShotCurrentFrameLeft == commanderShotTotalFramesLeft) {
+                                commanderShotShiftLeft = 0;
+                                commanderShotCurrentFrameLeft = 0;
+                            }
+
+                            commanderShotCurrentFrameLeft++;
+
+                            setTimeout(function(){requestAnimationFrame(animateCommanderShotLeft);}, 50);
+                            commanderShotXPositionLeft = commanderShotXPositionLeft - 8;
+                            if ((((commanderXPosition2 -30) <= commanderShotXPositionLeft) && (commanderShotXPositionLeft <= (commanderXPosition2 +30))) 
+                                && (((commanderYPosition2 +30) >= commanderShotYPositionLeft) && ((commanderYPosition2 -30) <= commanderShotYPositionLeft))) {
+                            if (commanderOneShotCounterLeft) {
+                            commanderHealth2 = commanderHealth2 - 34;
+                            commanderOneShotCounterLeft = false;
+                            }
+                            document.getElementById("user2Health").innerHTML = Player2Username +"'s Health: " + commanderHealth2;
+                        }
+                            commanderReadyTimingLeft = false;
+                            }
+                            else {
+                                ctx.fillStyle = "gray";
+                                ctx.fillRect(commanderShotXPositionLeft, commanderShotYPositionLeft, 100, 25);
+                                return;
+                            }
+                        }
+                }
+                }
+                if (WASDkey === 107 || WASDkey === 75) {
+        var commanderSprite2 = new Image();
+        commanderSprite2.src = "wizardCommanderArena4.png";
+        commanderSprite2.addEventListener("load", loadImage2, false);
+    
+    
+        function loadImage2() {
+            animateCommanderRight2();
+        }
+    
+        //Drawing the frames on the canvas
+        var recentCommanderXPosition2 = commanderXPosition2
+        function animateCommanderRight2() {
+            if (commanderXPosition2 < (recentCommanderXPosition2 + 10)) {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(commanderXPosition2, commanderYPosition2, 150, 200);
+
+                //drawing each frame
+                ctx.drawImage(commanderSprite2, commanderShift2, 0, commanderFrameWidth2, commanderFrameHieght2, commanderXPosition2, commanderYPosition2, commanderFrameWidth2, commanderFrameHieght2);
+                commanderShift2 += commanderFrameWidth2 + 1;
+
+                //returning to beginning of sprite sheet if at end of sheet
+                if (commanderCurrentFrame2 == commanderTotalFrames2) {
+                    commanderShift2 = 0;
+                    commanderCurrentFrame2 = 0;
+                }
+                
+                //telling function to move onto next Frame
+                commanderCurrentFrame2++;
+
+                
+                setTimeout(function(){requestAnimationFrame(animateCommanderRight2);}, 50);
+                commanderXPosition2=commanderXPosition2+4;
+                previousWASD = WASDkey;
+            }
+            else {
+                return;
+            }
+        }
+    }
+    if (WASDkey === 104 || WASDkey === 72) {
+        var commanderSpriteLeft2 = new Image();
+        commanderSpriteLeft2.src = "wizardCommanderLeft.png";
+        commanderSpriteLeft2.addEventListener("load", loadImageLeft2, false);
+
+        function loadImageLeft2() {
+            animateCommanderLeft2();
+        }
+        recentCommanderXPosition2 = commanderXPosition2;
+        recentCommanderYPosition2 = commanderYPosition2;
+        function animateCommanderLeft2() {
+            if (commanderXPosition2 > (recentCommanderXPosition2 - 10)) {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(commanderXPosition2, commanderYPosition2, 150, 200);
+
+                ctx.drawImage(commanderSpriteLeft2, commanderShiftLeft2, 0, commanderFrameWidthLeft2, commanderFrameHeightLeft2, commanderXPosition2, commanderYPosition2, commanderFrameWidthLeft2, commanderFrameHeightLeft2);
+                commanderShiftLeft2 += commanderFrameWidthLeft2 + 1;
+
+                if (commanderCurrentFrameLeft2 == commanderTotalFramesLeft2) {
+                    commanderShiftLeft2 = 0;
+                    commanderCurrentFrameLeft2 = 0;
+                }
+
+                commanderCurrentFrameLeft2 ++;
+
+                setTimeout(function(){requestAnimationFrame(animateCommanderLeft2);}, 50);
+                commanderXPosition2=commanderXPosition2-4;
+                previousWASD = WASDkey;
+                
+            }
+            else {
+                return;
+            }
+        }
+    }
+    if (WASDkey === 85 || WASDkey === 117) {
+        var commanderSpriteUp2 = new Image();
+        commanderSpriteUp2.src = "wizardCommanderArena4.png";
+        commanderSpriteUp2.addEventListener("load", loadImageUp2, false);
+    
+    
+        function loadImageUp2() {
+            animateCommanderUp2();
+        }
+    
+        //Drawing the frames on the canvas
+        var recentCommanderYPosition2 = commanderYPosition2
+        function animateCommanderUp2() {
+            if (commanderYPosition2 > (recentCommanderYPosition2 - 10)) {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(commanderXPosition2, commanderYPosition2, 150, 200);
+
+                //drawing each frame
+                ctx.drawImage(commanderSpriteUp2, commanderShiftUp2, 0, commanderFrameWidthUp2, commanderFrameHieghtUp2, commanderXPosition2, commanderYPosition2, commanderFrameWidthUp2, commanderFrameHieghtUp2);
+                commanderShiftUp2 += commanderFrameWidthUp2 + 1;
+
+                //returning to beginning of sprite sheet if at end of sheet
+                if (commanderCurrentFrameUp2 == commanderTotalFramesUp2) {
+                    commanderShiftUp2 = 0;
+                    commanderCurrentFrameUp2 = 0;
+                }
+                
+                //telling function to move onto next Frame
+                commanderCurrentFrameUp2++;
+
+                
+                setTimeout(function(){requestAnimationFrame(animateCommanderUp2);}, 50);
+                commanderYPosition2=commanderYPosition2-4;
+                previousWASD = WASDkey;
+            }
+            else {
+                return;
+            }
+        }
+    }
+    if (WASDkey === 106 || WASDkey === 74) {
+    var commanderSpriteDown2 = new Image();
+        commanderSpriteDown2.src = "wizardCommanderLeft.png";
+        commanderSpriteDown2.addEventListener("load", loadImageDown2, false);
+
+        function loadImageDown2() {
+            animateCommanderDown2();
+        }
+        recentCommanderYPosition2 = commanderYPosition2;
+        function animateCommanderDown2() {
+            if (commanderYPosition2 < (recentCommanderYPosition2 + 10)) {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(commanderXPosition2, commanderYPosition2, 150, 200);
+
+                ctx.drawImage(commanderSpriteDown2, commanderShiftDown2, 0, commanderFrameWidthDown2, commanderFrameHeightDown2, commanderXPosition2, commanderYPosition2, commanderFrameWidthDown2, commanderFrameHeightDown2);
+                commanderShiftDown2 += commanderFrameWidthDown2 + 1;
+
+                if (commanderCurrentFrameDown2 == commanderTotalFramesDown2) {
+                    commanderShiftDown2 = 0;
+                    commanderCurrentFrameDown2 = 0;
+                }
+
+                commanderCurrentFrameDown2 ++;
+
+                setTimeout(function(){requestAnimationFrame(animateCommanderDown2);}, 50);
+                commanderYPosition2=commanderYPosition2+4;
+                previousWASD = WASDkey;
+                
+            }
+            else {
+                return;
+            }
+        }
+    }
+    var commanderReadyTiming2 = true;
+    var commanderReadyTimingLeft2 = true;
+    if (WASDkey === 73 || WASDkey === 105) {
+        var commanderOneShotCounter2 = true;
+        var commanderOneShotCounterLeft2 = true;
+        commanderShotXPosition2 = commanderXPosition2;
+        commanderShotYPosition2 = commanderYPosition2;
+        if (previousWASD === 107 || previousWASD === 75) {
+        var commanderShotSprite2 = new Image();
+        commanderShotSprite2.src = "wizardShotArena.png";
+            
+        var commanderShotReady2 = new Image();
+        commanderShotReady2.src = "wizardCommanderReady.png";
+        commanderShotSprite2.addEventListener("load", loadImageShot2, false);
+        var recentShotXPosition2 = commanderShotXPosition2;
+        function loadImageShot2() {
+            animateCommanderShot2();
+        }
+        
+        function animateCommanderShot2() {
+            if (commanderShotXPosition2 < recentShotXPosition2 + 500) {
+            ctx.fillStyle = "gray";
+            ctx.fillRect(commanderShotXPosition2, commanderShotYPosition2, 100, 25);
+        
+            if (commanderReadyTiming2) {
+            ctx.fillStyle = "gray";
+            ctx.fillRect(commanderXPosition2, commanderYPosition2, 100, 100);
+            ctx.drawImage(commanderShotReady2, commanderXPosition2, commanderYPosition2 +30);
+            }
+            ctx.drawImage(commanderShotSprite2, commanderShotShift2, 0, commanderShotFrameWidth2, commanderShotFrameHeight2, commanderShotXPosition2, commanderShotYPosition2, commanderShotFrameWidth2, commanderShotFrameHeight2);
+            commanderShotShift2 += commanderShotFrameWidth2 +1;
+
+            if ((((commanderXPosition -30) <= commanderShotXPosition2) && (commanderShotXPosition2 <= (commanderXPosition +30))) 
+                                && (((commanderYPosition +30) >= commanderShotYPosition2) && ((commanderYPosition -30) <= commanderShotYPosition2))) {
+                            if (commanderOneShotCounter2) {
+                            commanderHealth = commanderHealth - 34;
+                            commanderOneShotCounter2 = false;
+                            }
+                            document.getElementById("user1Health").innerHTML = Player1Username +"'s Health: " + commanderHealth;
+                        }
+
+            commanderShotCurrentFrame2++;
+
+            setTimeout(function(){requestAnimationFrame(animateCommanderShot2);}, 50);
+            commanderShotXPosition2 = commanderShotXPosition2 + 8;
+            if (commanderShotXPosition2 == commanderXPosition && commanderShotYPosition2 == commanderYPosition) {
+                commanderHealth = commanderHealth - 34;
+                document.getElementById("user1Health").innerHTML = Player1Username + "'s: " + commanderHealth;
+            }
+            commanderReadyTiming2 = false;
+            }
+            else {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(commanderShotXPosition2, commanderShotYPosition2, 200, 200);
+                return;
+            }
+            
+        }
+
+
+        }
+        if (previousWASD === 104 || previousWASD === 72) {
+            commanderShotXPositionLeft2 = commanderXPosition2;
+            commanderShotYPositionLeft2 = commanderYPosition2;
+            var commanderShotSpriteLeft2 = new Image();
+            commanderShotSpriteLeft2.src = "wizardShotArena2.png";
+
+            var commanderShotReadyLeft2 = new Image();
+            commanderShotReadyLeft2.src = "wizardCommanderReady2.png";
+            commanderShotSpriteLeft2.addEventListener("load", loadImageShotLeft2, false);
+            
+            var recentShotXPositionLeft = commanderShotXPosition2;
+            function loadImageShotLeft2() {
+                animateCommanderShotLeft2();
+            }
+            
+            function animateCommanderShotLeft2() {
+                if (commanderShotXPositionLeft2 > recentShotXPositionLeft - 500) {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(commanderShotXPositionLeft2, commanderShotYPositionLeft2, 100, 25);
+                
+                if (commanderReadyTimingLeft2) {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(commanderXPosition2, commanderYPosition2, 100, 100);
+                ctx.drawImage(commanderShotReadyLeft2, commanderXPosition2, commanderYPosition2 +30);
+                }
+                ctx.drawImage(commanderShotSpriteLeft2, commanderShotShiftLeft2, 0, commanderShotFrameWidthLeft2, commanderShotFrameHeightLeft2, commanderShotXPositionLeft2, commanderShotYPositionLeft2, commanderShotFrameWidthLeft2, commanderShotFrameHeightLeft2);
+                commanderShotShiftLeft2 += commanderShotFrameWidthLeft2 +1;
+                    
+                if(commanderShotCurrentFrameLeft2 == commanderShotTotalFramesLeft2) {
+                    commanderShotShiftLeft2 = 0;
+                    commanderShotCurrentFrameLeft2 = 0;
+                }
+
+                commanderShotCurrentFrameLeft2++;
+
+                setTimeout(function(){requestAnimationFrame(animateCommanderShotLeft2);}, 50);
+                commanderShotXPositionLeft2 = commanderShotXPositionLeft2 - 8;
+                if ((((commanderXPosition -30) <= commanderShotXPositionLeft2) && (commanderShotXPositionLeft2 <= (commanderXPosition +30))) 
+                                && (((commanderYPosition +30) >= commanderShotYPositionLeft2) && ((commanderYPosition -30) <= commanderShotYPositionLeft2))) {
+                            if (commanderOneShotCounterLeft2) {
+                            commanderHealth = commanderHealth - 34;
+                            commanderOneShotCounterLeft2 = false;
+                            }
+                            document.getElementById("user1Health").innerHTML = Player1Username +"'s Health: " + commanderHealth;
+                        }
+                commanderReadyTimingLeft2 = false;
+                }
+                else {
+                    ctx.fillStyle = "gray";
+                    ctx.fillRect(commanderShotXPositionLeft2, commanderShotYPositionLeft2, 100, 25);
+                    return;
+                }
+            }
+    }
+    
+    }
+    if (commanderHealth2 <= 0) {
+        document.getElementById("winOrLose").innerHTML = Player1Username+" Wins!! "+Player1Username+" has earned the favor of Joe.";
+        alert(Player1Username+" Wins!! "+Player1Username+" has earned the favor of Joe.");
+        document.getElementById("storyBoard").innerHTML =  Player1Username +" shall now serve in Joe's army which is most likely lead to eventual death! : )"
+    }
+    if (commanderHealth <= 0) {
+        document.getElementById("winOrLose").innerHTML = Player2Username+" Wins!!"+Player2Username+" has earned the favor of Joe.";
+        alert(Player2Username+" Wins!!"+Player2Username+" has earned the favor of Joe.");
+        document.getElementById("storyBoard").innerHTML =  Player2Username +" shall now serve in Joe's army which is most likely lead to eventual death! : )"
+    }
+    if ((commanderHealth == 32) && (commanderHealth == 32)) {
+        document.getElementById("storyBoard").innerHTML = "As Joe became emperor of the region, he granted unlimited funds to finding mystical people. In the process he found Amir that Angel. Joe being a benevolent being now allows Amir to grants you both 25 health points.";
+        commanderHealth = commanderHealth +25;
+        commanderHealth2 = commanderHealth2 +25;
+    }
+    if (AngryJoe == 13 || AngryJoe == 39|| AngryJoe == 3) {
+        document.getElementById("storyBoard").innerHTML = "Joe has developed an impatience over the years and is becoming impatient at the moment. In his position he become furious when impatient and will force anyone near him to face his wrath. Unfortunately, that's one of you.";
+        if (unluckyMan == 1) {
+            commanderHealth = commanderHealth -100;
+            document.getElementById("user1Health").innerHTML = Player1Username +"'s Health: " + commanderHealth;
+        }
+        if (unluckyMan == 2) {
+            commanderHealth2 = commanderHealth -100;
+            document.getElementById("user2Health").innerHTML = Player2Username + "'s Health: " +commanderHealth2;
+        }
+        
+    }
+    if ((commanderHealth ==66) && (commanderHealth2 ==66)) {
+        document.getElementById("storyBoard").innerHTML = "Joe enjoys playing with his adversaries and the people who work under him. Given this quality, Joe has decided to systematically screw over his fighters.";
+        alert("Joe enjoys playing with his adversaries and the people who work under him. Given this quality, Joe has decided to systematically screw over his fighters.");
+        commanderHealth = commanderHealth -10;
+        commanderHealth2 = commanderHealth - 10
+    }
+    if (((commanderHealth == 66) && (commanderHealth2 == 32))) {
+        document.getElementById("storyBoard").innerHTML = "Amir the Angel blesses " + Player2Username+ " with a wierd substance that gives "+Player2Username+" with extra health!";
+        commanderHealth2 = commanderHealth2 + 32;
+        
+    }
+    docment.getElementById("user1Health").innerHTMl = Player1Username + " 's Health: "+ commanderHealth;
+    docment.getElementById("user2Health").innerHTMl = Player2Username + " 's Health: "+ commanderHealth2;
+    
+    
+
+
+
+
+                }
+                else {
+                    alert("Please click the Play Button to play. :)");
+                    return;
+                }
+                
+
+
+            }
+           
+    
+
+
+
+
+            
+        </script>
+        <style>
+            #User1input {
+                border: solid 1px gray;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="Arena" width="1536" height="450"></canvas><br>
+        <div style = "margin: auto; width: 10%; ">
+        <button id="Play" onclick="StartArena();"><img src="playButtonArena.png" height="72px" width="199px" style="border-radius: 35%; background-color: maroon; border: 2px solid gold; padding: 5px 5px 5px 5px; "/></button>
+        </div>
+        <div style = "padding: 10px 25% 10px 25%;">
+        <input type="text" onkeypress="WASDpressed(event)" id="User1input" style="margin: auto; width: 100%; border: 1px solid navy; padding: 10px;" value = "Type here to input into game:"></input> <br>
+        </div>
+        <div style = "padding: 10px 25% 20px 25%;">
+        <h1 id ="user1Health" style="margin: auto; width: 50%; border: 1px solid navy; padding: 3% 3% 3% 3%;"></h1>
+        </div>
+        <div style = "padding: 10px 25% 20px 25%;"><h1 id ="user2Health" style="margin: auto; width: 50%; border: 1px solid navy; padding: 3% 3% 3% 3%;"></h1></div>
+        <div style= "border: 3px dotted maroon; width: 50%; height: 25%; margin: auto;">
+        <p id="storyBoard" style="color: navy; padding: 5px 10px 5px 10px; font-size: 20px; font-family: impact;"></p>
+        </div>
+        <div style="border: 5px dashed gold; margin: auto; width: 75%; height: 15%; "><h1 id ="winOrLose" style></h1></div>
+        
+
+    </body>
+</html>
